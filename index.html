@@ -16,6 +16,7 @@
 	<script src="markers.js"></script>
 	<script src="buttons.js"></script>
 	<script src="pathsearch.js"></script>
+	<script src="bookmarks.js"></script>
 	<!-- API -->
 	<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx7b7144d6b822440c89d5008ebeb3fd17"></script>
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=66583dec16d8abc21e4a6f52204c826a&libraries=clusterer,services"></script>
@@ -191,16 +192,21 @@
 				<a href="#" class="sidebar_close_btn" onclick="closeSidebar()">&times;</a>
 				<div id="menu_wrap" class="bg_white" style="padding-left: 15px;">
 				<b style="font-size: 20px; color:rgb(43, 203, 140);">즐겨찾기</b><br><br>
-				<button type="submit" class="cookiebutton" onclick="ShowCookie(); return true;">즐겨찾기 보기</button>
-				<button type="submit" class="cookiebutton" onclick="delCookie(); return true;">즐겨찾기 삭제</button>
+				<button type="button" class="searchbutton" onclick="save_path(); return false;">저장하기</button>
+				<button type="button" class="searchbutton" onclick="get_path(); return false;">불러오기</button>
  				<br><br>
- 				<b style="font-size: 20px; color:rgb(43, 203, 140);">저장된 즐겨찾기</b><br>
-			<div id="strnm" style="font: size 14px; font-weight: bold; color: rgb(43, 203, 140);">
-							출발지 : 
-						</div>
-						<div id="dstnm" style="font: size 14px; font-weight: bold; color: rgb(43, 203, 140);">
-							도착지 : 
-						</div>
+				<hr>
+				<br>
+ 				<b style="font-size: 20px; color:rgb(43, 203, 140); margin-bottom: 10px;">저장된 경로 정보</b>
+				<br>
+				<br>
+				<div id="Session_str" style="font: size 14px; color: rgb(43, 203, 140);">
+					<b>출발지 : </b>
+				</div>
+				<br>
+				<div id="Session_dst" style="font: size 14px; color: rgb(43, 203, 140);">
+					<b>도착지 : </b>
+				</div>
 		</div>
 		
 		<!-- 비상연락처 서브사이드바  -->
@@ -342,14 +348,17 @@
         // 출발지와 도착지 객체 생성
         var start = new kakao.maps.LatLng(35.13367784973298, 129.1049204111099);
         var strnm = document.getElementById('strnm');
+			strnm.innerText = sessionStorage.getItem("strnm", strnm);
         var strX = document.getElementById('strX');
         var strY = document.getElementById('strY');
 
         var end = new kakao.maps.LatLng(35.132568, 129.091948);
-        var dstnm = document.getElementById('dstnm')
-        var dstX = document.getElementById('dstX')
-        var dstY = document.getElementById('dstY')
+        var dstnm = document.getElementById('dstnm');
+			dstnm.innerText = sessionStorage.getItem("dstnm", dstnm);
+        var dstX = document.getElementById('dstX');
+        var dstY = document.getElementById('dstY');
 
+		
 		// 지도 표시
 		var mapContainer = document.getElementById("map"); // 지도를 표시할 div
 		var mapOption = {
