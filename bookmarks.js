@@ -7,9 +7,10 @@ function save_path() {
     sessionStorage.setItem("dstnm", dstnm.innerText);
     var startname = document.getElementById('Session_str');
         startname.innerHtml = "<b>출발지 : </b>" + sessionStorage.getItem("strnm");
+        console.log(sessionStorage.getItem("strnm"))
     var endname = document.getElementById('Session_dst');
         endname.innerHtml = "<b>도착지 : </b>" + sessionStorage.getItem("dstnm");
-
+        console.log(sessionStorage.getItem("dstnm"))
     alert('경로가 저장되었습니다.');
 
 };
