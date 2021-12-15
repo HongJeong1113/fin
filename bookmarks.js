@@ -3,13 +3,13 @@ function save_path() {
     sessionStorage.setItem("start", start);
     sessionStorage.setItem("end", end);
     sessionStorage.setItem("passList", passListString);
-    sessionStorage.setItem("strnm", strnm);
-    sessionStorage.setItem("dstnm", dstnm);
+    sessionStorage.setItem("strnm", strnm.innerText);
+    sessionStorage.setItem("dstnm", dstnm.innerText);
     var startname = document.getElementById('Session_str');
-        startname.innerHtml = "<b>출발지 : </b>" + strnm.innerHtml;
+        startname.innerHtml = "<b>출발지 : </b>" + strnm.innerText;
     var endname = document.getElementById('Session_dst');
-        endname.innerHtml = "<b>도착지 : </b>" + dstnm.innerHtml;
-        
+        endname.innerHtml = "<b>도착지 : </b>" + dstnm.innerText;
+
     alert('경로가 저장되었습니다.');
 
 };
@@ -22,8 +22,8 @@ function get_path() {
     end_lng = sessionStorage.getItem("end").split(", ")[1].split(")")[0];
     start = new kakao.maps.LatLng(start_lat, start_lng);
     end = new kakao.maps.LatLng(end_lat, end_lng);
-    strnm.innerText = sessionStorage.getItem("strnm", strnm);
-    dstnm.innerText = sessionStorage.getItem("dstnm", dstnm);
+    strnm.innerText = sessionStorage.getItem("strnm");
+    dstnm.innerText = sessionStorage.getItem("dstnm");
 
     alert('경로를 불러옵니다.');
 
